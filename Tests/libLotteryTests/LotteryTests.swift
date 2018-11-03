@@ -3,11 +3,11 @@ import XCTest
 
 final class LotteryTests: XCTestCase {
     
-    private var lottery: Lottery!
-    
     private var minimumNumber: Int!
     private var maximumNumber: Int!
     private var count: Int!
+    
+    private var lottery: Lottery!
     
     // MARK: - Setting
     
@@ -40,10 +40,10 @@ final class LotteryTests: XCTestCase {
     }
     
     func testReultsAreShuffled() {
-        let basicArray = Array(minimumNumber...count)
+        let basicArray = Array(minimumNumber..<minimumNumber + count)
         let results = lottery.makeResults()
         
-        XCTAssertTrue(basicArray != results)
+        XCTAssertNotEqual(basicArray, results)
     }
     
     func testReultsAreSorted() {
