@@ -7,8 +7,6 @@ final class LotteryTests: XCTestCase {
     private var maximumNumber: Int!
     private var count: Int!
     
-    private var lottery: Lottery!
-    
     // MARK: - Setting
     
     override func setUp() {
@@ -17,37 +15,53 @@ final class LotteryTests: XCTestCase {
         minimumNumber = 1
         maximumNumber = 49
         count = 6
-        
-        lottery = Lottery(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
     }
     
     // MARK: - Tests
     
+    func testThrowingMinimumNumberIsGreaterThanMaximumNumberError() {
+        XCTAssertThrowsError(try Lottery.makeResults(minimumNumber: 60, maximumNumber: maximumNumber, count: count)) { error in
+            XCTAssertEqual(error as? LotteryError, LotteryError.minimumNumberIsGreaterThanMaximumNumber)
+        }
+    }
+    
+    func testThrowingCountIsGreaterThanAllNumbersCountError() {
+        XCTAssertThrowsError(try Lottery.makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: 50)) { error in
+            XCTAssertEqual(error as? LotteryError, LotteryError.countIsGreaterThanAllNumbersCount)
+        }
+    }
+    
     func testReultsAreGreaterOrEqualMinimum() {
-        for resultNumber in lottery.makeResults() {
+        let results = try! Lottery.makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
+        
+        for resultNumber in results {
             XCTAssertGreaterThanOrEqual(resultNumber, minimumNumber)
         }
     }
     
     func testReultsAreLessOrEqualMaximum() {
-        for resultNumber in lottery.makeResults() {
+        let results = try! Lottery.makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
+        
+        for resultNumber in results {
             XCTAssertLessThanOrEqual(resultNumber, maximumNumber)
         }
     }
     
     func testReultsCountAreTheSameAsUserInputCount() {
-        XCTAssertEqual(count, lottery.makeResults().count)
+        let results = try! Lottery.makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
+        
+        XCTAssertEqual(count, results.count)
     }
     
     func testReultsAreShuffled() {
         let basicArray = Array(minimumNumber..<minimumNumber + count)
-        let results = lottery.makeResults()
+        let results = try! Lottery.makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
         
         XCTAssertNotEqual(basicArray, results)
     }
     
     func testReultsAreSorted() {
-        let results = lottery.makeResults()
+        let results = try! Lottery.makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
         
         for index in 0..<results.count-1 {
             let resultNumber = results[index]
@@ -60,6 +74,8 @@ final class LotteryTests: XCTestCase {
     // MARK: - All
     
     static var allTests = [
+        ("testThrowingMinimumNumberIsGreaterThanMaximumNumberError", testThrowingMinimumNumberIsGreaterThanMaximumNumberError),
+        ("testThrowingCountIsGreaterThanAllNumbersCountError", testThrowingCountIsGreaterThanAllNumbersCountError),
         ("testReultsAreGreaterOrEqualMinimum", testReultsAreGreaterOrEqualMinimum),
         ("testReultsAreLessOrEqualMaximum", testReultsAreLessOrEqualMaximum),
         ("testReultsCountAreTheSameAsUserInputCount", testReultsCountAreTheSameAsUserInputCount),

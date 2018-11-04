@@ -1,19 +1,24 @@
 import Foundation
 
+public enum LotteryError: Error {
+    case minimumNumberIsGreaterThanMaximumNumber
+    case countIsGreaterThanAllNumbersCount
+}
+
 public struct Lottery {
     
-    public let minimumNumber: Int
-    public let maximumNumber: Int
-    public let count: Int
-    
-    public init(minimumNumber: Int, maximumNumber: Int, count: Int) {
-        self.minimumNumber = minimumNumber
-        self.maximumNumber = maximumNumber
-        self.count = count
-    }
-    
-    public func makeResults() -> [Int] {
-        return Array(minimumNumber...maximumNumber).shuffled()[..<count].sorted()
+    public static func makeResults(minimumNumber: Int, maximumNumber: Int, count: Int) throws -> [Int] {
+        guard minimumNumber <= maximumNumber else {
+            throw LotteryError.minimumNumberIsGreaterThanMaximumNumber
+        }
+        
+        let allNumbers = Array(minimumNumber...maximumNumber)
+        
+        guard count <= allNumbers.count else {
+            throw LotteryError.countIsGreaterThanAllNumbersCount
+        }
+        
+        return allNumbers.shuffled()[..<count].sorted()
     }
     
 }
