@@ -12,6 +12,5 @@ Clone, build project and run with values for arguments `minimumNumber`, `maximum
 ```bash
 $ git clone https://github.com/albinekcom/Lottery.git
 $ cd Lottery
-$ swift build
-$ .build/debug/Lottery --minimumNumber 1 --maximumNumber 49 --count 6
+$ swift run Lottery --minimumNumber 1 --maximumNumber 49 --count 6
 ```
