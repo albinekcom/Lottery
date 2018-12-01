@@ -7,7 +7,7 @@ Lottery generates random results from the range provided by the user.
 
 ## Usage
 
-Clone, build project and run with values for arguments `minimumNumber`, `maximumNumber` and `count`.
+Clone the repository and run with values for arguments `minimumNumber`, `maximumNumber` and `count`.
 
 ```bash
 $ git clone https://github.com/albinekcom/Lottery.git
