@@ -5,7 +5,11 @@ os:
   - osx
 
 osx_image:
-  - xcode11.0
+  - xcode12.2
 
 script:
-  - swift test --parallel
+  - swift package generate-xcodeproj
+  - xcodebuild test -scheme Lottery -destination platform="macOS" -enableCodeCoverage YES
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

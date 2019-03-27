@@ -1,14 +1,9 @@
-// swift-tools-version:5.0
-
+// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
     name: "Lottery",
-    products: [
-        .library(name: "libLottery", targets: ["libLottery"]),
-        .library(name: "libLotteryArgumentsParser", targets: ["libLotteryArgumentsParser"]),
-        .executable(name: "Lottery", targets: ["Lottery"])
-    ],
+
     targets: [
         .target(
             name: "libLottery",
@@ -16,9 +11,11 @@ let package = Package(
         .target(
             name: "libLotteryArgumentsParser",
             dependencies: []),
+
         .target(
             name: "Lottery",
             dependencies: ["libLottery", "libLotteryArgumentsParser"]),
+
         .testTarget(
             name: "libLotteryArgumentsParserTests",
             dependencies: ["libLotteryArgumentsParser"]),

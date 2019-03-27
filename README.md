@@ -1,7 +1,8 @@
 # Lottery
 
-![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
+![Swift 5.3](https://img.shields.io/badge/Swift-5.3-orange.svg)
 [![Build Status](https://travis-ci.org/albinekcom/Lottery.svg?branch=master)](https://travis-ci.org/albinekcom/Lottery)
+[![codecov](https://codecov.io/gh/albinekcom/Lottery/branch/master/graph/badge.svg?token=TTQ3UD6033)](https://codecov.io/gh/albinekcom/Lottery)
 
 Lottery generates random results from the range provided by the user.
 
