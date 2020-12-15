@@ -71,15 +71,4 @@ final class LotteryTests: XCTestCase {
         }
     }
 
-    // MARK: - All
-
-    static var allTests = [
-        ("testThrowingMinimumNumberIsGreaterThanMaximumNumberError", testThrowingMinimumNumberIsGreaterThanMaximumNumberError),
-        ("testThrowingCountIsGreaterThanAllNumbersCountError", testThrowingCountIsGreaterThanAllNumbersCountError),
-        ("testReultsAreGreaterOrEqualMinimum", testReultsAreGreaterOrEqualMinimum),
-        ("testReultsAreLessOrEqualMaximum", testReultsAreLessOrEqualMaximum),
-        ("testReultsCountAreTheSameAsUserInputCount", testReultsCountAreTheSameAsUserInputCount),
-        ("testReultsAreShuffled", testReultsAreShuffled),
-        ("testReultsAreSorted", testReultsAreSorted)
-    ]
 }
