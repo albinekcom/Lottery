@@ -22,7 +22,7 @@ do {
 let results: [Int]
 
 do {
-    results = try Lottery.makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
+    results = try Lottery().makeResults(minimumNumber: minimumNumber, maximumNumber: maximumNumber, count: count)
 } catch LotteryError.minimumNumberIsGreaterThanMaximumNumber {
     print("Error: Mimimum number is bigger then maximum number")
     exit(1)
