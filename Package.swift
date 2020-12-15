@@ -4,6 +4,8 @@ import PackageDescription
 let package = Package(
     name: "Lottery",
 
+    dependencies: [],
+
     targets: [
         .target(
             name: "libLottery",
