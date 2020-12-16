@@ -1,32 +1,46 @@
-import Foundation
-
 public enum LotteryArgumentsParserError: Error {
-    case minimumNumberIsMissing
-    case maximumNumberIsMissing
-    case countIsMissing
+    
+    case minimumNumberError
+    case maximumNumberError
+    case countError
+    
+}
+
+public struct LotteryArguments: Equatable {
+    
+    public let minimumNumber: Int
+    public let maximumNumber: Int
+    public let count: Int
+    
 }
 
 public struct LotteryArgumentsParser {
     
-    public static func parse(arguments: [String]) throws -> (Int, Int, Int) {
+    public init() {}
+    
+}
+
+extension LotteryArgumentsParser: LotteryArgumentsParserPort {
+    
+    public func parse(arguments: [String]) -> Result<LotteryArguments, LotteryArgumentsParserError> {
         let dictionary = convertArgumentsToDictionary(arguments: arguments)
         
         guard let minimumNumberValue = dictionary["minimumNumber"] else {
-            throw LotteryArgumentsParserError.minimumNumberIsMissing
+            return .failure(.minimumNumberError)
         }
         
         guard let maximumNumberValue = dictionary["maximumNumber"] else {
-            throw LotteryArgumentsParserError.maximumNumberIsMissing
+            return .failure(.maximumNumberError)
         }
         
         guard let countValue = dictionary["count"] else {
-            throw LotteryArgumentsParserError.countIsMissing
+            return .failure(.countError)
         }
         
-        return (minimumNumberValue, maximumNumberValue, countValue)
+        return .success(LotteryArguments(minimumNumber: minimumNumberValue, maximumNumber: maximumNumberValue, count: countValue))
     }
     
-    private static func convertArgumentsToDictionary(arguments: [String]) -> [String: Int] {
+    private func convertArgumentsToDictionary(arguments: [String]) -> [String: Int] {
         var dictionary = [String: Int]()
         
         for index in 0..<arguments.count {
@@ -51,3 +65,10 @@ public struct LotteryArgumentsParser {
     }
     
 }
+
+public protocol LotteryArgumentsParserPort {
+    
+    func parse(arguments: [String]) -> Result<LotteryArguments, LotteryArgumentsParserError>
+    
+}
+

@@ -8,21 +8,33 @@ let package = Package(
 
     targets: [
         .target(
-            name: "libLottery",
+            name: "LotteryArgumentsParser",
             dependencies: []),
         .target(
-            name: "libLotteryArgumentsParser",
+            name: "LotteryEngine",
             dependencies: []),
-
+        .target(
+            name: "Application",
+            dependencies: ["LotteryArgumentsParser", "LotteryEngine"]),
+        .target(
+            name: "MainHelpers",
+            dependencies: ["Application"]),
         .target(
             name: "Lottery",
-            dependencies: ["libLottery", "libLotteryArgumentsParser"]),
+            dependencies: ["Application", "MainHelpers"]),
 
         .testTarget(
-            name: "libLotteryArgumentsParserTests",
-            dependencies: ["libLotteryArgumentsParser"]),
+            name: "LotteryArgumentsParserTests",
+            dependencies: ["LotteryArgumentsParser"]),
         .testTarget(
-            name: "libLotteryTests",
-            dependencies: ["libLottery"])
+            name: "LotteryEngineTests",
+            dependencies: ["LotteryEngine"]),
+        .testTarget(
+            name: "ApplicationTests",
+            dependencies: ["Application", "LotteryArgumentsParser", "LotteryEngine"]),
+        .testTarget(
+            name: "MainHelpersTests",
+            dependencies: ["MainHelpers"]),
+
     ]
 )
