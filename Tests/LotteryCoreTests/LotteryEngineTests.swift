@@ -1,4 +1,4 @@
-@testable import LotteryEngine
+@testable import LotteryCore
 import XCTest
 
 final class LotteryEngineTests: XCTestCase {
@@ -6,22 +6,22 @@ final class LotteryEngineTests: XCTestCase {
     private let defaultMinimumNumber = 1
     private let defaultMaximumNumber = 49
     private let defaultCount = 6
-    
+
     func testReturningMinimumNumberIsGreaterThanMaximumNumberError() {
         let result = LotteryEngine().makeResults(minimumNumber: 60, maximumNumber: defaultMaximumNumber, count: defaultCount)
-        
+
         XCTAssertEqual(result, .failure(.minimumNumberIsGreaterThanMaximumNumber))
     }
-    
+
     func testReturningCountIsGreaterThanAllNumbersCountError() {
         let result = LotteryEngine().makeResults(minimumNumber: defaultMinimumNumber, maximumNumber: defaultMaximumNumber, count: 50)
-        
+
         XCTAssertEqual(result, .failure(.countIsGreaterThanAllNumbersCount))
     }
-    
+
     func testReultsAreGreaterOrEqualMinimum() {
         let results = LotteryEngine().makeResults(minimumNumber: defaultMinimumNumber, maximumNumber: defaultMaximumNumber, count: defaultCount)
-        
+
         switch results {
         case .success(let results):
             for resultNumber in results {
@@ -31,10 +31,10 @@ final class LotteryEngineTests: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testReultsAreLessOrEqualMaximum() {
         let results = LotteryEngine().makeResults(minimumNumber: defaultMinimumNumber, maximumNumber: defaultMaximumNumber, count: defaultCount)
-        
+
         switch results {
         case .success(let results):
             for resultNumber in results {
@@ -44,10 +44,10 @@ final class LotteryEngineTests: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testReultsCountAreTheSameAsUserInputCount() {
         let results = LotteryEngine().makeResults(minimumNumber: defaultMinimumNumber, maximumNumber: defaultMaximumNumber, count: defaultCount)
-        
+
         switch results {
         case .success(let results):
             XCTAssertEqual(results.count, defaultCount)
@@ -55,11 +55,11 @@ final class LotteryEngineTests: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testReultsAreShuffled() {
         let basicArray = Array(defaultMinimumNumber..<defaultMaximumNumber + defaultCount)
         let results = LotteryEngine().makeResults(minimumNumber: defaultMinimumNumber, maximumNumber: defaultMaximumNumber, count: defaultCount)
-        
+
         switch results {
         case .success(let results):
             XCTAssertNotEqual(results, basicArray)
@@ -67,10 +67,10 @@ final class LotteryEngineTests: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testReultsAreSorted() {
         let results = LotteryEngine().makeResults(minimumNumber: defaultMinimumNumber, maximumNumber: defaultMaximumNumber, count: defaultCount)
-        
+
         switch results {
         case .success(let results):
             for index in 0..<results.count-1 {

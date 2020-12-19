@@ -1,5 +1,3 @@
-import Application
-
 public struct MainOutcome {
 
     public enum ExitType: Int32 {

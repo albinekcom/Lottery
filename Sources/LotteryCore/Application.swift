@@ -1,6 +1,3 @@
-import LotteryEngine
-import LotteryArgumentsParser
-
 public enum ApplicationError: Error, Equatable {
 
     case minimumNumberIsMissing

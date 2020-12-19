@@ -4,37 +4,16 @@ import PackageDescription
 let package = Package(
     name: "Lottery",
 
-    dependencies: [],
-
     targets: [
         .target(
-            name: "LotteryArgumentsParser",
-            dependencies: []),
-        .target(
-            name: "LotteryEngine",
-            dependencies: []),
-        .target(
-            name: "Application",
-            dependencies: ["LotteryArgumentsParser", "LotteryEngine"]),
-        .target(
-            name: "MainHelpers",
-            dependencies: ["Application"]),
+            name: "LotteryCore"),
+
         .target(
             name: "Lottery",
-            dependencies: ["Application", "MainHelpers"]),
+            dependencies: ["LotteryCore"]),
 
         .testTarget(
-            name: "LotteryArgumentsParserTests",
-            dependencies: ["LotteryArgumentsParser"]),
-        .testTarget(
-            name: "LotteryEngineTests",
-            dependencies: ["LotteryEngine"]),
-        .testTarget(
-            name: "ApplicationTests",
-            dependencies: ["Application", "LotteryArgumentsParser", "LotteryEngine"]),
-        .testTarget(
-            name: "MainHelpersTests",
-            dependencies: ["MainHelpers"]),
-
+            name: "LotteryCoreTests",
+            dependencies: ["LotteryCore"])
     ]
 )

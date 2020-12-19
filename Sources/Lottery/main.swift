@@ -1,6 +1,5 @@
-import Application
 import Foundation
-import MainHelpers
+import LotteryCore
 
 let applicationResult = Application().makeApplicationResult(userStringArguments: CommandLine.arguments)
 let mainOutcome = MainOutcomeFactory().makeOutcome(fromApplicationResult: applicationResult)
