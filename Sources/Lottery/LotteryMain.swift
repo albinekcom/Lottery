@@ -2,15 +2,16 @@
 struct LotteryMain {
     
     static var printerType: Printer.Type = SystemPrinter.self
+    static var arguments = CommandLine.arguments
     
     static func main() {
         do {
-            let userArguments = try UserArguments(arguments: CommandLine.arguments)
+            let userArguments = try UserArguments(arguments: arguments)
             let lotteryResults = try Lottery.results(minimumNumber: userArguments.minimumNumberValue,
                                                      maximumNumber: userArguments.maximumNumberValue,
                                                      count: userArguments.countValue)
             
-            printerType.display(text: lotteryResults.description)
+            printerType.display(text: "\(lotteryResults)")
         } catch let error as CustomStringConvertible {
             printerType.display(text: "Error: \(error)")
         } catch {
@@ -31,7 +32,3 @@ private struct SystemPrinter: Printer {
     static func display(text: String) { print(text) }
     
 }
-
-// TODO: Add unit tests for "Lottery"
-// TODO: Add unit tests for "UserArguments"
-// TODO: Add unit tests for "LotteryMain"

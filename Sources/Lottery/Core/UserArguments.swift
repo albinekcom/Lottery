@@ -36,7 +36,9 @@ struct UserArguments {
         var foudMaximumNumberValue: Int?
         var foundCountValue: Int?
         
-        for (index, argument) in arguments.enumerated() {
+        for index in 0..<arguments.count - 1 {
+            let argument = arguments[index]
+            
             guard let userArgumentType = UserArgumentType(rawValue: String(argument.dropFirst().dropFirst())),
                   let value = Int(arguments[index + 1]) else { continue }
             
