@@ -7,6 +7,7 @@ final class LotteryMainTests: XCTestCase {
         super.setUp()
         
         LotteryMain.printerType = PrinterMock.self
+        LotteryMain.lotteryType = Lottery.self
     }
     
     // MARK: - Tests
@@ -59,6 +60,15 @@ final class LotteryMainTests: XCTestCase {
         XCTAssertEqual("Error: Argument \"Count\" is greater than all numbers count", PrinterMock.printed.last)
     }
     
+    func test_main_lotteryThrowsUnknownError() async {
+        LotteryMain.arguments = ["--minimumNumber", "1", "--maximumNumber", "10", "--count", "5"]
+        LotteryMain.lotteryType = LotteryStub.self
+        
+        await LotteryMain.main()
+        
+        XCTAssertEqual("Error: something went wrong", PrinterMock.printed.last)
+    }
+    
 }
 
 // MARK: - Helpers
@@ -69,6 +79,20 @@ private struct PrinterMock: Printer {
     
     static func display(text: String) {
         printed.append(text)
+    }
+    
+}
+
+private struct LotteryStub: AnyLottery {
+    
+    enum Error: Swift.Error {
+        
+        case unknown
+        
+    }
+    
+    static func results(minimumNumber: Int, maximumNumber: Int, count: Int) throws -> [Int] {
+        throw Error.unknown
     }
     
 }
