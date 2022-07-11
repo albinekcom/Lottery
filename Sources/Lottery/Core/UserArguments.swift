@@ -1,3 +1,5 @@
+import Foundation
+
 enum UserArgumentsError: Error, CustomStringConvertible {
     
     case minimumNumberError
@@ -31,7 +33,7 @@ struct UserArguments {
     let maximumNumberValue: Int
     let countValue: Int
     
-    init(arguments: [String]) throws {
+    init(arguments: [String] = CommandLine.arguments) throws {
         var foundMinimumNumberValue: Int?
         var foudMaximumNumberValue: Int?
         var foundCountValue: Int?
