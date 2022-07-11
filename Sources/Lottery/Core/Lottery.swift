@@ -16,13 +16,13 @@ enum LotteryError: Error, CustomStringConvertible {
 
 protocol AnyLottery {
     
-    static func results(minimumNumber: Int, maximumNumber: Int, count: Int) throws -> [Int]
+    func results(minimumNumber: Int, maximumNumber: Int, count: Int) throws -> [Int]
     
 }
 
 struct Lottery: AnyLottery {
     
-    static func results(minimumNumber: Int, maximumNumber: Int, count: Int) throws -> [Int] {
+    func results(minimumNumber: Int, maximumNumber: Int, count: Int) throws -> [Int] {
         guard minimumNumber <= maximumNumber else {
             throw LotteryError.minimumNumberIsGreaterThanMaximumNumber
         }

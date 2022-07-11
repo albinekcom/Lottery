@@ -1,3 +1,5 @@
+import Foundation
+
 enum UserArgumentsError: Error, CustomStringConvertible {
     
     case minimumNumberError

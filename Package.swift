@@ -4,10 +4,15 @@ import PackageDescription
 
 let package = Package(
     name: "Lottery",
+
     targets: [
-        .executableTarget(name: "Lottery"),
-        
-        .testTarget(name: "LotteryTests",
-                    dependencies: ["Lottery"])
+        .executableTarget(
+            name: "Lottery"
+        ),
+
+        .testTarget(
+            name: "LotteryTests",
+            dependencies: ["Lottery"]
+        )
     ]
 )

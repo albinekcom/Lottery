@@ -1,6 +1,6 @@
 # Lottery
 
-![Swift 5.5](https://img.shields.io/badge/Swift-5.5-orange.svg)
+![Swift 5.6](https://img.shields.io/badge/Swift-5.6-orange.svg)
 [![Build](https://github.com/albinekcom/Lottery/actions/workflows/build.yml/badge.svg)](https://github.com/albinekcom/Lottery/actions/workflows/build.yml)
 
 Lottery generates random results from the range provided by the user.
